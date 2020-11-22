@@ -16,7 +16,7 @@ yarn dist
 - vue-router
 - vue-shortcut
 - mocha
-- contain more libraries. see package.json.
+- contained more libraries. see package.json.
  
 
 
