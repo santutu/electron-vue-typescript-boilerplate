@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import {isDev, isProd} from "../helpers/helpers";
-import authStore from "./store/modules/authStore";
+import {isDev, isProd} from "../../helpers/helpers";
+import authStore from "../store/modules/authStore";
 
 Vue.prototype.$isDev = isDev;
 Vue.prototype.$isProd = isProd;

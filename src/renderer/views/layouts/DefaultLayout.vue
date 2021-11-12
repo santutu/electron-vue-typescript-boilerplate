@@ -22,15 +22,36 @@
             >
                 <v-list-item
                     link
+                    @click.prevent="$router.push('/')"
                 >
                     <v-list-item-icon>
                         <v-icon>mdi-view-dashboard</v-icon>
                     </v-list-item-icon>
 
                     <v-list-item-content>
-                        <v-list-item-title @click="$router.push('/')">Dashboard</v-list-item-title>
+                        <v-list-item-title>Main Page</v-list-item-title>
                     </v-list-item-content>
+
+
                 </v-list-item>
+
+                <v-list-item
+                    link
+                    @click.prevent="$router.push('/SamplePage')"
+                >
+                    <v-list-item-icon>
+                        <v-icon>mdi-view-dashboard</v-icon>
+                    </v-list-item-icon>
+
+                    <v-list-item-content>
+                        <v-list-item-title>SamplePage</v-list-item-title>
+
+                    </v-list-item-content>
+
+
+                </v-list-item>
+
+
             </v-list>
 
         </v-navigation-drawer>

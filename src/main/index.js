@@ -11,11 +11,11 @@ let mainWindow
 
 function createMainWindow() {
     const options = {
-        width : 1500,
-        height : 1000,
-        webPreferences: {
-            nodeIntegration: true,
-        },
+        width: 1500,
+        height: 1000,
+        frame: true,
+        title: 'boilerplate',
+        webPreferences: {nodeIntegration: true}
 
     }
 

@@ -1,5 +1,5 @@
 import Vue from "vue";
-import {AuthStore} from "./store/modules/authStore";
+import {AuthStore} from "../store/modules/authStore";
 
 declare module 'vue/types/vue' {
 
