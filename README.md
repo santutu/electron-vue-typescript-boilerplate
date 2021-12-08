@@ -2,6 +2,8 @@
 
 Base is electron  webpack project.
 
+recommended node version is 16.13.0
+
 ```
 yarn 
 yarn test
