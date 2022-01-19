@@ -3,26 +3,34 @@
 import {app, BrowserWindow} from 'electron'
 import * as path from 'path'
 import {format as formatUrl} from 'url'
+import {createMenubar} from "./createMenubar";
+
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
-let mainWindow
+let mainWindow;
+let menu;
 
 function createMainWindow() {
     const options = {
         width: 1500,
         height: 1000,
+        show: isDevelopment,
         frame: true,
         title: 'boilerplate',
         webPreferences: {nodeIntegration: true}
-
     }
 
     if (isDevelopment) {
         options.webPreferences.webSecurity = false;
     }
     const window = new BrowserWindow(options);
+
+    if(!isDevelopment){
+        window.maximize();
+        window.show();
+    }
 
     if (isDevelopment) {
         window.webContents.openDevTools()
@@ -65,9 +73,15 @@ app.on('activate', () => {
     if (mainWindow === null) {
         mainWindow = createMainWindow()
     }
+    if (menu === null) {
+        createMenubar(mainWindow);
+    }
 })
 
 // create main BrowserWindow when electron is ready
 app.on('ready', () => {
     mainWindow = createMainWindow()
+    menu = createMenubar(mainWindow);
 })
+
+

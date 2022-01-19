@@ -3,41 +3,49 @@ import 'es6-promise/auto'
 import Vue from "vue"
 import Component from "vue-class-component"
 import DefaultLayout from "./views/layouts/DefaultLayout.vue";
-import "./plugins/vueShortKey"
-import "./plugins/vueScreen"
-import "./plugins/extendFormValidationRules"
-import "./plugins/filters"
-import "./plugins/local-storage"
-import vuetify from "./plugins/vuetify"
-import './types/vue-global-variable'
+import "./systems/plugins/vueShortKey"
+import "./systems/plugins/vueScreen"
+import "./systems/plugins/extendFormValidationRules"
+import "./systems/plugins/filters"
+import "./systems/plugins/local-storage"
+import {registerVueGlobalVariables} from './types/registerVuegobalVariables'
 import router from "./views/routers/router"
 import {store} from "./store";
 import {Provide} from "vue-inversify-decorator";
-import container from "./container";
 import InitializeApp from "./systems/InitializeApp";
+import {container} from "./systems/Container";
+import {listenMenubarCommands} from "./listenMenubarCommands";
 
-@Component({
-               components: {
-                   DefaultLayout
-               },
-               template: `
-                   <DefaultLayout/>`
-           })
-@Provide(container)
-class App extends Vue {
-
-    created() {
-        console.log('hello world')
-    }
-}
 
 (async () => {
+
     await new InitializeApp().init();
-    new App({
-                router,
-                store,
-                vuetify,
-            }).$mount('#app');
+
+    @Component({
+                   components: {
+                       DefaultLayout
+                   },
+                   template: `
+                       <DefaultLayout/>`
+               })
+    @Provide(container)
+    class VueApp extends Vue {
+
+        created() {
+            console.log('hello world')
+        }
+    }
+
+
+    registerVueGlobalVariables();
+
+
+    listenMenubarCommands(router);
+
+    new VueApp({
+                   router,
+                   store,
+               }).$mount('#app');
 })();
 
 

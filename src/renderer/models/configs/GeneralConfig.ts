@@ -1,4 +1,4 @@
-import ISaveLoadable from "../../libs/saveLoader/ISaveLoadable";
+import ISaveLoadable from "../../systems/lib/saveLoader/ISaveLoadable";
 import {Exclude} from "class-transformer";
 
 

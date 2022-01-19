@@ -1,7 +1,37 @@
 import {Action, getModule, Module, Mutation, MutationAction, VuexModule} from 'vuex-module-decorators'
 import {store} from "../index";
-import User, {UserLoginData} from "../../models/User";
-import {authClient} from "../../services/AuthService";
+import User, {UserCreateData, UserLoginData} from "../../models/User";
+
+
+export class AuthClient {
+
+
+    public async login(email: string, password: string): Promise<User> {
+
+        return new User({email: "test@email.com"})
+    }
+
+    public async getMe(): Promise<User> {
+        return new User({email: "test@email.com"})
+    }
+
+    public async logout() {
+
+
+    }
+
+    public async register(user: UserCreateData): Promise<User> {
+        return new User({email: "test@email.com"})
+
+    }
+
+
+}
+
+
+const authClient = new AuthClient()
+
+//////////////////////////////////////////////
 
 @Module({
             store,

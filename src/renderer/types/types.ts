@@ -16,3 +16,8 @@ export type PropertiesOmit<T, K extends keyof T> = Omit<Properties<T>, K>
 export type PropertiesOptional<T, K extends keyof Properties<T>>
     = Optional<Properties<T>, K>
 
+
+export type Enum<E> = Record<keyof E, number | string> & { [k: number]: string };
+
+
+export type Nullable<T> = T | null;

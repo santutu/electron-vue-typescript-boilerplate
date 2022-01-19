@@ -1,26 +1,39 @@
-import {serviceProviderClasses} from "../configs/app";
-import {container} from "./container";
+import {serviceBootClasses, serviceRegisterClasses} from "./config/app";
 import GlobalWebContents from "./GlobalWebContents";
 import {injectable} from "inversify";
 import {IS_DEV} from "./system_constants";
+import {factory} from "../utils/utils";
+import {container} from "./Container";
 
 @injectable()
 export default class InitializeApp {
 
-    static isOnceRegisterServiceProviders = false;
 
     async init() {
-        await this.registerServiceProviders();
+        await this.registerService();
+        await this.bootService()
+
         if (IS_DEV) {
             (new GlobalWebContents()).registerContextMenu();
         }
     }
 
-    protected async registerServiceProviders() {
-        for (const serviceProviderClass of serviceProviderClasses) {
-            const serviceProvider = container.get(serviceProviderClass)
-            await serviceProvider.register();
+    public async registerService() {
+        for (const registerClass of serviceRegisterClasses) {
+            const serviceRegister = factory(registerClass)
+            await serviceRegister.register();
         }
-        InitializeApp.isOnceRegisterServiceProviders = true
+    }
+
+
+    public async bootService() {
+        for (const bootClass of serviceBootClasses) {
+            const serviceBoot = factory(bootClass)
+            await serviceBoot.boot();
+        }
+    }
+
+    public clearServiceRegister() {
+        container.unbindAll();
     }
 }
