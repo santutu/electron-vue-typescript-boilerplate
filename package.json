@@ -27,6 +27,7 @@
   "devDependencies": {
     "@mdi/font": "^5.8.55",
     "@testdeck/mocha": "^0.1.2",
+    "ts-node": "^10.8.1",
     "@types/chai": "^4.2.14",
     "@types/electron": "^1.6.10",
     "@types/fs-extra": "^8.0.1",
